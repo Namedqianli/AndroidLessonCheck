@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imv_account_identity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bt_account_alter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/bt_account_alter"
+        android:text="修改资料"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/imv_account_identity"
+        app:layout_constraintEnd_toEndOf="@id/imv_account_identity"
+        app:layout_constraintTop_toBottomOf="@id/imv_account_identity"
+        app:layout_constraintBottom_toTopOf="@+id/account_divider1"
+        app:qmui_backgroundColor="@color/colorBackground"
+        app:qmui_radius="5dp"/>
+
+    <LinearLayout
+        android:id="@+id/account_divider1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        style="@style/common_horizontal_division_line_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bt_account_alter"
+        app:layout_constraintBottom_toTopOf="@+id/tv1"/>
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="姓名"
+        android:textColor="@color/colorAccountText"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/account_divider1"
+        app:layout_constraintBottom_toTopOf="@+id/account_divider2"/>
+
+    <TextView
+        android:id="@+id/tv_account_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="李钧煜"
+        app:layout_constraintTop_toTopOf="@+id/tv1"
+        app:layout_constraintBottom_toBottomOf="@id/tv1"
+        app:layout_constraintStart_toEndOf="@+id/tv1"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/account_divider2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        style="@style/common_horizontal_division_line_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_account_name"
+        app:layout_constraintBottom_toTopOf="@id/tv2"/>
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="身份"
+        android:textColor="@color/colorAccountText"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/tv1"
+        app:layout_constraintTop_toBottomOf="@+id/account_divider2"
+        app:layout_constraintBottom_toTopOf="@+id/account_divider3"/>
+
+    <TextView
+        android:id="@+id/tv_account_identity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="学生"
+        app:layout_constraintTop_toTopOf="@+id/tv2"
+        app:layout_constraintBottom_toBottomOf="@id/tv2"
+        app:layout_constraintStart_toEndOf="@+id/tv2"
+        app:layout_constraintStart_toStartOf="@+id/tv2"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/account_divider3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        style="@style/common_horizontal_division_line_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_account_identity"
+        app:layout_constraintBottom_toTopOf="@id/tv3"/>
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="院校"
+        android:textColor="@color/colorAccountText"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/tv1"
+        app:layout_constraintTop_toBottomOf="@+id/account_divider3"
+        app:layout_constraintBottom_toTopOf="@+id/account_divider4"/>
+
+    <TextView
+        android:id="@+id/tv_account_school"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="桂林电子科技大学"
+        app:layout_constraintTop_toTopOf="@+id/tv3"
+        app:layout_constraintBottom_toBottomOf="@+id/tv3"
+        app:layout_constraintStart_toEndOf="@+id/tv3"
+        app:layout_constraintStart_toStartOf="@+id/tv3"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/account_divider4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        style="@style/common_horizontal_division_line_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_account_school"
+        app:layout_constraintBottom_toTopOf="@id/tv4"/>
+
+    <TextView
+        android:id="@+id/tv4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="学号"
+        android:textColor="@color/colorAccountText"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/tv1"
+        app:layout_constraintTop_toBottomOf="@+id/account_divider4"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_account_Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1700300216"
+        app:layout_constraintTop_toTopOf="@+id/tv4"
+        app:layout_constraintBottom_toBottomOf="@+id/tv4"
+        app:layout_constraintStart_toEndOf="@+id/tv4"
+        app:layout_constraintStart_toStartOf="@+id/tv4"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

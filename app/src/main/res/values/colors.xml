@@ -5,4 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorSelectMask">#80416F96</color>
+    <color name="lessonItemBackground">#FF87CEFA</color>
+    <color name="colorAccountText">#FF8A8A8A</color>
+    <color name="colorBlueThem">#FF1296DB</color>
 </resources>
