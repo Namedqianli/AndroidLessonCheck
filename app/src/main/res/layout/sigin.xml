@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".SiginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -215,9 +216,19 @@
             android:layout_marginTop="32dp"
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             app:qmui_backgroundColor="@color/colorBlueThem"/>
 
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/qrbtn_sigin_back"
+            android:text="返回"
+            android:textSize="20dp"
+            android:textColor="@color/colorBackground"
+            android:layout_marginTop="82dp"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:qmui_backgroundColor="@color/colorBlueThem"/>
     </RelativeLayout>
 
 </LinearLayout>
