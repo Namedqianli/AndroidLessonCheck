@@ -11,6 +11,8 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
+
 public class SiginActivity extends AppCompatActivity implements View.OnClickListener{
     private Button buttonSigin;
     private Button buttonBack;
@@ -65,6 +67,62 @@ public class SiginActivity extends AppCompatActivity implements View.OnClickList
                     checkBoxStudent.setChecked(false);
                 }
                 break;
+            case R.id.qrbtn_sigin_sigin:
+                //注册
+                dealSgin();
         }
+    }
+    private void dealSgin(){
+        String account = editTextAccount.getText().toString();
+        String password = editTextPassword.getText().toString();
+        String name = editTextName.getText().toString();
+        String id = editTextId.getText().toString();
+        String school = editTextSchool.getText().toString();
+        String identif = "";
+
+        if(account.isEmpty()){
+            //账号为空
+            final QMUITipDialog tipDialog = new QMUITipDialog.Builder(this)
+                    .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
+                    .setTipWord("请输入账号")
+                    .create();
+            tipDialog.show();
+            editTextAccount.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    tipDialog.dismiss();
+                }
+            }, 1500);
+        }else if(password.isEmpty()){
+            //密码为空
+            final QMUITipDialog tipDialog = new QMUITipDialog.Builder(this)
+                    .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
+                    .setTipWord("请输入密码")
+                    .create();
+            tipDialog.show();
+            editTextPassword.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    tipDialog.dismiss();
+                }
+            }, 1500);
+        }else if(name.isEmpty()){
+            //名字为空
+
+        }
+        if(checkBoxStudent.isChecked()){
+            identif = "student";
+        }else if(checkBoxTeacher.isChecked()){
+            identif = "teacher";
+        }else {
+
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DBService dbService = DBService.getDbService();
+                dbService.sigin("1354654", "231846515", "1611544", "alsdk", "guet", "teacher");
+            }
+        }).start();
     }
 }

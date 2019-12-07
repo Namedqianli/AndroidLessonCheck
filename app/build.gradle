@@ -29,5 +29,5 @@ dependencies {
     implementation 'com.qmuiteam:qmui:1.4.0'
     def qmui_arch_version = '0.6.1'
     implementation "com.qmuiteam:arch:$qmui_arch_version"
-    implementation files('src/main/libs/mysql-connector-java-5.1.30-bin.jar')
+    implementation files('libs/mysql-connector-java-5.1.30-bin.jar')
 }

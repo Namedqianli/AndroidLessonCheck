@@ -5,46 +5,51 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 public class DBOpenHelper {
 
     private static String driver = "com.mysql.jdbc.Driver";//MySQL 驱动
-    private static String url = "jdbc:mysql://IP:3306/lessoncheck";//MYSQL数据库连接Url
-    private static String user = "root";//用户名
-    private static String password = "";//密码
+    private static String url = "jdbc:mysql://118.25.88.42:3306/lessoncheck";//MYSQL数据库连接Url
+    private static String user = "lesson";//用户名
+    private static String password = ".123456";//密码
 
     /**
      * 连接数据库
      * */
 
-    public static Connection getConn(){
+    public static Connection getConnection(){
         Connection conn = null;
         try {
-            Class.forName(driver);//获取MYSQL驱动
-            conn = (Connection) DriverManager.getConnection(url, user, password);//获取连接
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+//                    System.setProperty("jdbc.driver","com.mysql.jdbc.Driver");
+//                    java.sql.DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+//                    DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+//                    new com.mysql.jdbc.Driver();
+            Class.forName(driver);
+            conn = DriverManager.getConnection(url, user, password);//获取连接
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return conn;
     }
 
     /**
      * 关闭数据库
      * */
-
-    public static void closeAll(Connection conn, PreparedStatement ps){
-        if (conn != null) {
+    public static void closeAll(Connection connection, Statement statement){
+        if (connection != null) {
             try {
-                conn.close();
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if (ps != null) {
+        if (statement != null) {
             try {
-                ps.close();
+                statement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -55,29 +60,27 @@ public class DBOpenHelper {
     /**
      * 关闭数据库
      * */
-
-    public static void closeAll(Connection conn, PreparedStatement ps, ResultSet rs){
-        if (conn != null) {
+    public static void closeAll(Connection connection, Statement statement, ResultSet resultSet){
+        if (connection != null) {
             try {
-                conn.close();
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if (ps != null) {
+        if (statement != null) {
             try {
-                ps.close();
+                statement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if (rs != null) {
+        if (resultSet != null) {
             try {
-                rs.close();
+                resultSet.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
-
 }
