@@ -8,11 +8,13 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editTextPassword;
     private CheckBox checkBoxRemember;
     private TextView textViewSigin;
+    private ImageView imageViewVisbility;
     private Intent intent;
     private static final String LOGIN_ACCOUNT = "Login_Account";
     private final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -51,11 +54,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             super.handleMessage(msg);
             switch (msg.what){
                 case 1:
+                    if(msg.obj.toString().isEmpty()){
+                        tipDialog.dismiss();
+                        tipDialog = new QMUITipDialog.Builder(LoginActivity.this)
+                                .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
+                                .setTipWord("登录失败，账号或密码错误!")
+                                .create();
+                        tipDialog.show();
+                        editTextAccount.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                tipDialog.dismiss();
+                            }
+                        }, 1500);
+                        break;
+                    }
                     intent.setClass(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    break;
             }
         }
     };
+    private Boolean bPwSeitch = false;
+    private QMUITipDialog tipDialog = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,8 +87,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editTextPassword = findViewById(R.id.edt_login_password);
         checkBoxRemember = findViewById(R.id.cb_login_remember_password);
         textViewSigin = findViewById(R.id.tv_login_sigin);
+        imageViewVisbility = findViewById(R.id.imv_login_visbility);
         buttonLogin.setOnClickListener(this);
         textViewSigin.setOnClickListener(this);
+        imageViewVisbility.setOnClickListener(this);
         intent = new Intent();
         setPassword();
         getPermission();
@@ -87,7 +110,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.imv_login_visbility:
                 //密码可见/不可见
-
+                bPwSeitch = !bPwSeitch;
+                if(bPwSeitch){
+                    imageViewVisbility.setImageResource(R.drawable.ic_visibility_black_24dp);
+                    editTextPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }else{
+                    imageViewVisbility.setImageResource(R.drawable.ic_visibility_off_black_24dp);
+                    editTextPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
+                }
+                break;
         }
     }
 
@@ -146,7 +177,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.putBoolean(rememberPasswordKey, false);
             editor.apply();
         }
-        QMUITipDialog tipDialog = new QMUITipDialog.Builder(this)
+        tipDialog = new QMUITipDialog.Builder(this)
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
                 .setTipWord("登录中")
                 .create();
@@ -195,7 +226,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(account != null && !TextUtils.isEmpty(account)){
             editTextAccount.setText(account);
         }
-
         if(password != null && !TextUtils.isEmpty(password)){
             editTextPassword.setText(password);
         }

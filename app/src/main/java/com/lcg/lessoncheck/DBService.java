@@ -37,9 +37,9 @@ public class DBService {
      * */
     public String getPassword(String account){
         //存放结果
-        String password = new String();
+        String password = "";
         //sql语句
-        String sql="select password from account where account='%s'";
+        String sql="select password from user where account='%s'";
         sql = String.format(sql, account);
         try{
             connection = DBOpenHelper.getConnection();
@@ -75,7 +75,6 @@ public class DBService {
             if(statement != null && !connection.isClosed()){
                 if(statement != null){
                     boolean re = statement.execute(sql);
-                    resultSet.next();
                 }
             }
         }catch (SQLException e){
