@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView textViewSigin;
     private ImageView imageViewVisbility;
     private Intent intent;
-    private static final String LOGIN_ACCOUNT = "Login_Account";
+    public static final String LOGIN_ACCOUNT = "Login_Account";
     private final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             super.handleMessage(msg);
             switch (msg.what){
                 case 1:
-                    if(msg.obj.toString().isEmpty()){
+                    if(msg.obj.toString().equals(editTextPassword.getText().toString())){
                         tipDialog.dismiss();
                         tipDialog = new QMUITipDialog.Builder(LoginActivity.this)
                                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }, 1500);
                         break;
                     }
+                    intent.putExtra(LOGIN_ACCOUNT, editTextAccount.getText().toString());
                     intent.setClass(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     break;
