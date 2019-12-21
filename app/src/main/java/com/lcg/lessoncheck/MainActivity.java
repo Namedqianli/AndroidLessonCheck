@@ -5,15 +5,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.mysql.jdbc.Constants;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private BottomNavigationView bottomNavigationView;
@@ -24,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Fragment fragmentMessage;   //信息页面
     private Fragment[] fragments;       //用于页面的切换
     private String account;             //记录登录的帐号
+    private String type;                //记录用户类型
     private int lastFragment;           //记录页面号
     public static final String LOGIN_ACCOUNT = "Login_Account";
 
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bottomNavigationView.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         account = intent.getStringExtra(LoginActivity.LOGIN_ACCOUNT);
+        type = intent.getStringExtra(LoginActivity.LOGIN_TYPE);
         init();
         initFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_view, fragmentLesson).show(fragmentLesson).commit();
@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     lastFragment = 0;
                 }
                 break;
-            case R.id.radius_image_view_message:
-                break;
+//            case R.id.radius_image_view_message:
+//                break;
             case R.id.radius_image_view_info:
                 if(lastFragment != 1){
                     switchFragment(lastFragment,1);
@@ -77,7 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bundle bundle = new Bundle();
         bundle.putString(LOGIN_ACCOUNT, account);
         fragmentAccount = new Account();
-        fragmentLesson = new Lesson();
+        if(type.equals("teacher")){
+            fragmentLesson = new LessonTeacher();
+        }else {
+            fragmentLesson = new LessonStudent();
+        }
 
         fragmentAccount.setArguments(bundle);
         fragmentLesson.setArguments(bundle);

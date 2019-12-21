@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ImageView imageViewVisbility;
     private Intent intent;
     public static final String LOGIN_ACCOUNT = "Login_Account";
+    public static final String LOGIN_TYPE = "Login_Type";
     private final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -54,7 +56,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             super.handleMessage(msg);
             switch (msg.what){
                 case 1:
-                    if(msg.obj.toString().equals(editTextPassword.getText().toString())){
+                    String[] result = msg.obj.toString().split("##");
+                    if(!result[0].equals(editTextPassword.getText().toString())){
+                        //登录失败
                         tipDialog.dismiss();
                         tipDialog = new QMUITipDialog.Builder(LoginActivity.this)
                                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
@@ -70,8 +74,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         break;
                     }
                     intent.putExtra(LOGIN_ACCOUNT, editTextAccount.getText().toString());
+                    intent.putExtra(LOGIN_TYPE, result[1]);
                     intent.setClass(LoginActivity.this, MainActivity.class);
+                    //打开主页面
                     startActivity(intent);
+                    //关闭
+                    finish();
                     break;
             }
         }
@@ -104,6 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //按下注册，跳转到注册按钮
                 intent.setClass(LoginActivity.this, SiginActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.qrbtn_login_login:
                 //按下登录键
@@ -190,16 +199,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 try {
                     DBService dbService = DBService.getDbService();
                     String password = dbService.getPassword(editTextAccount.getText().toString());
-                    Message message = new Message();
+                    String type = dbService.getAccountType(editTextAccount.getText().toString());
+                    Message message = Message.obtain();
                     message.what = 1;
-                    message.obj = password;
+                    message.obj = password + "##" + type;
                     handler.sendMessage(message);
+//                    Message message1 = Message.obtain();
+//                    String type = dbService.getAccountType(editTextAccount.getText().toString());
+//                    message1.what = 2;
+//                    message1.obj = type;
+//                    handler.sendMessage(message1);
 //                    System.setProperty("jdbc.driver","com.mysql.jdbc.Driver");
 //                    java.sql.DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 //                    DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 //                    new com.mysql.jdbc.Driver();
 //                    Class.forName("com.mysql.jdbc.Driver");
-//                    conn = DriverManager.getConnection("jdbc:mysql://118.25.88.42:3306/lessoncheck", "lesson", ".123456");//获取连接
+//                    conn = DriverManager.getConnection("jdbc:mysql://118.25.88.42:3306/lessoncheck", "lesson_teacher", ".123456");//获取连接
 //                    String password =
                 } catch (Exception e) {
                     e.printStackTrace();

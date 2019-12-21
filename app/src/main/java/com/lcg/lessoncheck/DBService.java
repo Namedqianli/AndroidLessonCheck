@@ -1,5 +1,7 @@
 package com.lcg.lessoncheck;
 
+import android.database.Cursor;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -176,21 +178,152 @@ public class DBService {
     /**
      * 注册
      * */
-    public void sigin(String account, String password, String id, String name, String school, String identi){
+    public boolean sigin(String account, String password, String id, String name, String school, String identi){
 
         //sql语句
         String sql="INSERT INTO lessoncheck.`user`(Account, password, id, name, school, identification) VALUES('%s', '%s', '%s', '%s', '%s', '%s')";
         sql = String.format(sql, account, password, id, name, school, identi);
+        String sql1 = "INSERT INTO lessoncheck.`check`(studentaccount, studentlocation, teacherlocation, `key`, cid) VALUES('%s', '%s', '%s', '%s', '%s')";
+        sql1 = String.format(sql1, account, '0', '0', '0', '0');
         try{
             connection = DBOpenHelper.getConnection();
             statement = connection.createStatement();
             if(statement != null && !connection.isClosed()){
                 if(statement != null){
                     boolean re = statement.execute(sql);
+                    if(identi.equals("student")){
+                        re = statement.execute(sql1);
+                    }
+//                    if(re){
+//                        re = statement.execute(sql1);
+//                        if(re){
+//                            return true;
+//                        }
+//                    }
                 }
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
+        return false;
+    }
+
+    /*
+    * 获取签到码
+    * */
+    public String getKey(String account){
+        String key = "";
+        //sql语句
+        String sql = "select `key` from `check` where studentaccount='%s'";
+        sql = String.format(sql, account);
+        try{
+            connection = DBOpenHelper.getConnection();
+            statement = connection.createStatement();
+            if(statement != null && !connection.isClosed()){
+                if(statement != null){
+                    resultSet = statement.executeQuery(sql);
+                    if(resultSet != null){
+                        resultSet.next();
+                        key = resultSet.getString("key");
+                    }
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        DBOpenHelper.closeAll(connection, statement, resultSet);
+
+        return key;
+    }
+
+    /*
+     * 设置签到码
+     * */
+    public String setKey(String key){
+        //sql语句
+        String sql = "UPDATE `check` SET `key`='%s'";
+        sql = String.format(sql, key);
+        try{
+            connection = DBOpenHelper.getConnection();
+            statement = connection.createStatement();
+            if(statement != null && !connection.isClosed()){
+                if(statement != null){
+                    statement.execute(sql);
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        DBOpenHelper.closeAll(connection, statement, resultSet);
+
+        return key;
+    }
+
+    /*
+     * 设置签到标志
+     * */
+    public void setCheckFlag(String account){
+        //sql语句
+        String sql = "UPDATE `check` SET `key`='1' where studentaccount='%s'";
+        sql = String.format(sql, account);
+        try{
+            connection = DBOpenHelper.getConnection();
+            statement = connection.createStatement();
+            if(statement != null && !connection.isClosed()){
+                if(statement != null){
+                    statement.execute(sql);
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        DBOpenHelper.closeAll(connection, statement, resultSet);
+    }
+
+    /*
+     * 获取签到人数
+     * */
+    public ResultSet getCheck(){
+        //sql语句
+        String sql = "select * from `check`";
+        try{
+            connection = DBOpenHelper.getConnection();
+            statement = connection.createStatement();
+            if(statement != null && !connection.isClosed()){
+                if(statement != null){
+                    resultSet = statement.executeQuery(sql);
+                    return resultSet;
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        DBOpenHelper.closeAll(connection, statement);
+
+        return resultSet;
+    }
+
+    /*
+     * 获取签到的学生信息
+     * */
+    public ResultSet getCheckStudentInfo(String account){
+        //sql语句
+        String sql = "select * from user where account='%s'";
+        sql = String.format(sql, account);
+        try{
+            connection = DBOpenHelper.getConnection();
+            statement = connection.createStatement();
+            if(statement != null && !connection.isClosed()){
+                if(statement != null){
+                    resultSet = statement.executeQuery(sql);
+                    return resultSet;
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        DBOpenHelper.closeAll(connection, statement);
+
+        return resultSet;
     }
 }

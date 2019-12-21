@@ -14,7 +14,7 @@
         android:id="@+id/tv_lesson_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="课程名称"
+        android:text="姓名"
         android:textColor="@color/qmui_config_color_white"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -36,23 +36,23 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_lesson_item_name"/>
 
     <TextView
-        android:id="@+id/tv_lesson_item_info"
+        android:id="@+id/tv_lesson_item_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="课程信息"
+        android:text="学号"
         android:textColor="@color/qmui_config_color_white"
         app:layout_constraintTop_toBottomOf="@+id/tv_lesson_item_name"
         app:layout_constraintStart_toStartOf="@+id/tv_lesson_item_name"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_lesson_item_techer"
+        android:id="@+id/tv_lesson_item_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="老师名字/用户名"
+        android:text="签到情况"
         android:textColor="@color/qmui_config_color_white"
-        app:layout_constraintTop_toTopOf="@+id/tv_lesson_item_info"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_lesson_item_info"
+        app:layout_constraintTop_toTopOf="@+id/tv_lesson_item_id"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_lesson_item_id"
         app:layout_constraintEnd_toEndOf="@+id/imv_lesson_item_menu"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

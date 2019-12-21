@@ -17,23 +17,23 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/radius_image_view_message"
+        app:layout_constraintEnd_toStartOf="@+id/radius_image_view_info"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <ImageView
-        android:id="@+id/radius_image_view_message"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/colorBackground"
-        android:clickable="true"
-        android:src="@drawable/comments"
-        android:adjustViewBounds="true"
-        app:layout_constraintBottom_toBottomOf="@id/radius_image_view_home"
-        app:layout_constraintEnd_toStartOf="@+id/radius_image_view_info"
-        app:layout_constraintStart_toEndOf="@+id/radius_image_view_home"
-        app:layout_constraintTop_toTopOf="@id/radius_image_view_home"
-        app:layout_constraintVertical_bias="0.0" />
+<!--    <ImageView-->
+<!--        android:id="@+id/radius_image_view_message"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:background="@color/colorBackground"-->
+<!--        android:clickable="true"-->
+<!--        android:src="@drawable/comments"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/radius_image_view_home"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/radius_image_view_info"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/radius_image_view_home"-->
+<!--        app:layout_constraintTop_toTopOf="@id/radius_image_view_home"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
 
     <ImageView
         android:id="@+id/radius_image_view_info"
@@ -42,7 +42,7 @@
         android:background="@color/colorBackground"
         android:src="@drawable/account"
         android:clickable="true"
-        app:layout_constraintStart_toEndOf="@+id/radius_image_view_message"
+        app:layout_constraintStart_toEndOf="@+id/radius_image_view_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/radius_image_view_home"
         app:layout_constraintBottom_toBottomOf="@id/radius_image_view_home"/>

@@ -27,6 +27,7 @@ public class SiginActivity extends AppCompatActivity implements View.OnClickList
     private CheckBox checkBoxStudent;
     private ImageView imageViewVisbility;
     private boolean bPwSeitch = false;
+    private boolean siginFlag = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class SiginActivity extends AppCompatActivity implements View.OnClickList
                 //返回键按下跳转到登录界面
                 Intent intent = new Intent(SiginActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.cb_sigin_student:
                 //学生选中
@@ -192,9 +194,8 @@ public class SiginActivity extends AppCompatActivity implements View.OnClickList
                     identif = "teacher";
                 }
                 DBService dbService = DBService.getDbService();
-                dbService.sigin(account, password, id, name, school, identif);
+                siginFlag = dbService.sigin(account, password, id, name, school, identif);
             }
         }).start();
-
     }
 }

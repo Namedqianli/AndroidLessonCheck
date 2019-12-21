@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Lesson">
+    tools:context=".LessonTeacher">
 
     <TextView
         android:id="@+id/tv_kind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="我的课程"
+        android:text="签到情况"
         android:textSize="25dp"
         android:textStyle="bold"
         android:layout_marginTop="40dp"
@@ -19,17 +19,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/qrbtn_lesson_check"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitEnd"
-        android:layout_marginEnd="25dp"
-        android:src="@drawable/plus"
-        app:layout_constraintStart_toStartOf="@+id/tv_kind"
+        android:layout_marginEnd="10dp"
+        android:text="开始签到"
         app:layout_constraintBottom_toBottomOf="@+id/tv_kind"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_kind"
         app:layout_constraintTop_toTopOf="@+id/tv_kind"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintVertical_bias="0.0" />
 
     <ListView
         android:id="@+id/lv_lesson"

@@ -11,8 +11,8 @@ public class DBOpenHelper {
 
     private static String driver = "com.mysql.jdbc.Driver";//MySQL 驱动
     private static String url = "jdbc:mysql://118.25.88.42:3306/lessoncheck";//MYSQL数据库连接Url
-    private static String user = "lesson";//用户名
-    private static String password = ".123456";//密码
+    private static String user = "lesson";//用户名：lesson
+    private static String password = ".123456";//密码：.123456
 
     /**
      * 连接数据库
