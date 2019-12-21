@@ -41,16 +41,14 @@ public class LessonStudent extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         account = getArguments().getString(MainActivity.LOGIN_ACCOUNT);
         qmuiRoundButtonCheck = getActivity().findViewById(R.id.qrbtn_lesson_student_check);
-        qmuiRoundButtonSelect = getActivity().findViewById(R.id.qrbtn_lesson_student_select);
+//        qmuiRoundButtonSelect = getActivity().findViewById(R.id.qrbtn_lesson_student_select);
         qmuiRoundButtonCheck.setOnClickListener(this);
-        qmuiRoundButtonSelect.setOnClickListener(this);
+//        qmuiRoundButtonSelect.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.qrbtn_lesson_student_select:
-                break;
             case R.id.qrbtn_lesson_student_check:
                 final QMUIDialog.EditTextDialogBuilder builder = new QMUIDialog.EditTextDialogBuilder(getActivity());
                 builder.setTitle("请输入签到码")

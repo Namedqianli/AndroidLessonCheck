@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -197,5 +198,9 @@ public class SiginActivity extends AppCompatActivity implements View.OnClickList
                 siginFlag = dbService.sigin(account, password, id, name, school, identif);
             }
         }).start();
+        Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(SiginActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
